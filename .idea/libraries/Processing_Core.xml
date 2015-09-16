@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Processing-Core">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/processing-2.2.1-windows64/processing-2.2.1/core/library/core.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/processing-2.2.1-windows64/processing-2.2.1/core/library/jogl-all.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/processing-2.2.1-windows64/processing-2.2.1/core/library/gluegen-rt.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://processing.org/reference/javadoc/core/" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="jar://$USER_HOME$/Desktop/processing-2.2.1-windows64/processing-2.2.1/core/library/gluegen-rt-natives-windows-i586.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/processing-2.2.1-windows64/processing-2.2.1/core/library/jogl-all-natives-windows-i586.jar!/" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
