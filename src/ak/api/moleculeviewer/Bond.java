@@ -13,16 +13,15 @@ public class Bond {
         DOUBLE,
         TRIPLE
     }
-
     //Properties
     private BondType bondType;
     private ArrayList<Atom> atoms = new ArrayList<>(2);
 
     /**
      * Constructor for the bond, an error gets thrown if the atoms are the same, are null
-     * @param firstAtom
-     * @param secondAtom
-     * @param type
+     * @param firstAtom the first atom for the bond
+     * @param secondAtom the second atom for the bond
+     * @param type the type of the bond
      */
     public Bond(Atom firstAtom, Atom secondAtom, BondType type){
         if(firstAtom == secondAtom)
