@@ -1,7 +1,7 @@
-package ak.moleculeviewer.chemistry;
+package ak.api.moleculeviewer;
 
 /**
  * Created by Aleksander Kaminski {theinfamouspig@gmail.com} on 15/09/2015.
  */
-public class Bond {
+public class ChemHelper {
 }

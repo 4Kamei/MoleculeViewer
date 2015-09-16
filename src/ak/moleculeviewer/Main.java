@@ -1,6 +1,5 @@
 package ak.moleculeviewer;
 
-import ak.moleculeviewer.chemistry.ChemHelper;
 import ak.moleculeviewer.render.RenderApplet;
 import ak.moleculeviewer.render.RenderFrame;
 import processing.core.PApplet;
@@ -11,8 +10,12 @@ import java.awt.*;
  * Created by Aleksander Kaminski {theinfamouspig@gmail.com} on 11/09/2015.
  */
 public class Main {
+
     private static JTextField textField;
+
     public static void main(String[] args){
+
+        //Create 'rendering' applet, using RenderFrame as I needed to override the action when the window closes to include stopping the applet
 
         RenderFrame appletFrame = new RenderFrame("Render Applet");
         appletFrame.setSize(600,600);
@@ -23,8 +26,7 @@ public class Main {
         renderApplet.noLoop();
         appletFrame.setVisible(false);
 
-
-
+        //Create 'main' applet.
         System.out.println("Hello World");
         JFrame mainFrame = new JFrame("Molecule Viewer");
         mainFrame.setSize(400,500);
@@ -38,7 +40,7 @@ public class Main {
             mainButton.addActionListener(e -> {
 
                         /*
-                        enderApplet.loop();
+                        renderApplet.loop();
                         appletFrame.setVisible(true);
                         */
                     }
