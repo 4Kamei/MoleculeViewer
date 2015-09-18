@@ -1,12 +1,14 @@
 package ak.api.moleculeviewer;
 
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 /**
  * Created by Aleksander Kaminski {theinfamouspig@gmail.com} on 16/09/2015.
  */
 public enum AtomType{
 
     //Symbol, Rel. Atomic Mass, Group Number,
-
     CARBON ("C", 12, 4),
     HYDROGEN ("H", 1, 1),
     CHLORINE ("Cl", 35.5, 7),
@@ -26,4 +28,8 @@ public enum AtomType{
         this.groupNum = groupNumber;
     }
 
+    public static AtomType getTypeBySymbol(String symbol){
+        Stream<AtomType> s = StreamSupport.stream(AtomType.values());
+
+    }
 }

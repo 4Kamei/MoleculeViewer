@@ -1,11 +1,15 @@
 package ak.moleculeviewer;
 
+import ak.api.moleculeviewer.*;
 import ak.moleculeviewer.render.RenderApplet;
 import ak.moleculeviewer.render.RenderFrame;
+import org.lwjgl.Sys;
 import processing.core.PApplet;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * Created by Aleksander Kaminski {theinfamouspig@gmail.com} on 11/09/2015.
  */
@@ -18,9 +22,10 @@ public class Main {
         //Create 'rendering' applet, using RenderFrame as I needed to override the action when the window closes to include stopping the applet
 
         RenderFrame appletFrame = new RenderFrame("Render Applet");
-        appletFrame.setSize(600,600);
+        appletFrame.setSize(800,200);
         appletFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        PApplet renderApplet = new RenderApplet(600, 600, false);
+        PApplet renderApplet = new RenderApplet(800, 200, false);
+        appletFrame.setResizable(false);
         appletFrame.add(renderApplet);
         renderApplet.init();
         renderApplet.noLoop();
@@ -38,10 +43,12 @@ public class Main {
         JPanel contentPanel = new JPanel();
             JButton mainButton = new JButton("Display Chemical ");
             mainButton.addActionListener(e -> {
-
+                        String formula = textField.getText();
+                        ArrayList<Atom> atoms = new ArrayList<>();
+                        String[] atomStrings =
                         /*
-                        renderApplet.loop();
-                        appletFrame.setVisible(true);
+                            renderApplet.loop();
+                            appletFrame.setVisible(true);
                         */
                     }
             );

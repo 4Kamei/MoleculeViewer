@@ -13,12 +13,13 @@ public class Bond {
         DOUBLE,
         TRIPLE
     }
+
     //Properties
     private BondType bondType;
     private ArrayList<Atom> atoms = new ArrayList<>(2);
 
     /**
-     * Constructor for the bond, an error gets thrown if the atoms are the same, are null
+     * Constructor for the bond, an error gets thrown if the atoms are the same or are null
      * @param firstAtom the first atom for the bond
      * @param secondAtom the second atom for the bond
      * @param type the type of the bond
@@ -46,7 +47,7 @@ public class Bond {
      */
     public Atom getOtherAtom(Atom atom){
         if (!atoms.contains(atom))
-            throw new IllegalArgumentException(atoms + "doesn't contain " + atom);
+            throw new IllegalArgumentException(atoms + " doesn't contain " + atom);
         return atoms.stream().filter(a -> a != atom).collect(Collectors.toList()).get(0);
     }
 

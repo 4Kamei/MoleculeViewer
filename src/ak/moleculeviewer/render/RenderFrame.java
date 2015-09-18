@@ -26,7 +26,7 @@ public class RenderFrame extends JFrame {
                 Component c = this.getContentPane().getComponents()[0];
                 //Is c a RenderApplet?
                 if(c instanceof RenderApplet){
-                    //Cast c to RenderApplet and stop the loop
+                    //Cast c to RenderApplet and stop the loop to not waste time running an invisible applet
                     ((RenderApplet) c).noLoop();
                 }
             }
