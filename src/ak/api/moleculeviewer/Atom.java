@@ -1,6 +1,8 @@
 package ak.api.moleculeviewer;
 
 import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Each atom should have a list of bond it contains that is updated whenever something happens to the other atom of the bond, this should include
@@ -47,6 +49,13 @@ public class Atom {
         ArrayList<Atom> atoms = new ArrayList<>(bonds.size());
         bonds.stream().forEachOrdered(bond -> atoms.add(bond.getOtherAtom(this)));
         return atoms;
+    }
+
+    public void removeBond(Atom atom){
+        if(bonds.stream().noneMatch(bond -> bond.getAtoms().contains(atom)))
+            throw new NullPointerException(this + " does not contain bond with " + atom);
+        atom.removeBond(this);
+        bonds.stream().filter(bond -> bond.getOtherAtom(this) != atom).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
