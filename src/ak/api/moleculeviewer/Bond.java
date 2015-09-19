@@ -1,5 +1,6 @@
 package ak.api.moleculeviewer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -8,15 +9,10 @@ import java.util.stream.Collectors;
  */
 public class Bond {
 
-    public enum BondType{
-        SINGLE,
-        DOUBLE,
-        TRIPLE
-    }
-
     //Properties
     private BondType bondType;
-    private ArrayList<Atom> atoms = new ArrayList<>(2);
+    private Atom root;
+    private Atom extension;
 
     /**
      * Constructor for the bond, an error gets thrown if the atoms are the same or are null
@@ -31,11 +27,15 @@ public class Bond {
             throw new IllegalArgumentException("One of the atoms is null");
         if(type == null)
             throw new IllegalArgumentException("Bond type is null");
-        atoms.add(firstAtom);
-        atoms.add(secondAtom);
+        root = firstAtom;
+        extension = secondAtom;
         bondType = type;
     }
 
+    /**
+     * Returns the strength of the bond
+     * @return BondType - strength of the bond
+     */
     public BondType getBondType() {
         return bondType;
     }
@@ -46,9 +46,12 @@ public class Bond {
      * @return Atom - the other atom from the bond
      */
     public Atom getOtherAtom(Atom atom){
-        if (!atoms.contains(atom))
-            throw new IllegalArgumentException(atoms + " doesn't contain " + atom);
-        return atoms.stream().filter(a -> a != atom).collect(Collectors.toList()).get(0);
+        if(atom != root && atom != extension)
+            throw new NullPointerException(atom + " does not exist in bond " + this);
+        if(atom == extension)
+            return root;
+        else
+            return extension;
     }
 
     /**
@@ -56,6 +59,9 @@ public class Bond {
      * @return the two atoms that form the bond.
      */
     public ArrayList<Atom> getAtoms(){
+        ArrayList<Atom> atoms = new ArrayList<Atom>(2);
+        atoms.add(root);
+        atoms.add(extension);
         return atoms;
     }
 

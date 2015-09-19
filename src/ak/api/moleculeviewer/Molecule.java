@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public class Molecule {
 
     //Parameters.
-    private ArrayList<Bond> bonds;
     private ArrayList<Atom> atoms;
     private ArrayList<Atom> longestChain;
     private Atom root;
@@ -27,7 +26,6 @@ public class Molecule {
         if(root == null)
             throw new IllegalArgumentException("Root atom cannot be null");
         //initialise bonds to a new array
-        bonds = new ArrayList<>();
         atoms = new ArrayList<>();
         longestChain = new ArrayList<>();
         this.root = root;
@@ -41,15 +39,13 @@ public class Molecule {
      * @param extension the extension atom, this atom will be destroyed after the bond is removed
      */
     public void removeBond(Atom baseAtom, Atom extension) {
-        if (extension == root)
+        if (extension == null)
             throw new IllegalArgumentException("extension atom cannot be null");
         if (extension.getBondedAtoms().containsAll(atoms))
             throw new UnsupportedOperationException("cannot remove whole chain, please use removeAllBonds");
         //TODO: Java 8 streams why are you so complicated.
-        bonds = bonds.stream()
-                .filter(bond -> !bond.getAtoms().contains(extension))
-                .collect(Collectors.toCollection(ArrayList<Bond>::new));
-
+        baseAtom.getBondedAtoms().remove(extension);
+        atoms.stream().filter(atom -> atom != extension).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -60,7 +56,7 @@ public class Molecule {
      * @param extension the atom on the other side of the bond, this will be removed once the bond is broken
      */
     public void removeAllBonds(Atom baseAtom, Atom extension){
-        if (extension == root)
+        if (extension == null)
             throw new IllegalArgumentException("extension atom cannot be null");
 
     }
@@ -68,19 +64,18 @@ public class Molecule {
     /**
      * Adds a bond to an atom in the existing molecule.
      * @param baseAtom the base atom from which to bond from
-     * @param exension the extension atom - the second atom
-     * @return integer - the ID of root atom.
+     * @param extension the extension atom - the second atom
+     * @param bondType the strength of the bond
+     * @return integer - the ID of base atom.
      */
-    public int addBond(Atom baseAtom, Atom exension, Bond.BondType bondType){
+    public void addBond(Atom baseAtom, Atom extension, Bond.BondType bondType){
         if(baseAtom == null)
             throw new IllegalArgumentException("base atom cannot be null");
-        if(exension == null)
+        if(extension == null)
             throw new IllegalArgumentException("extension atom cannot be null");
-        if(baseAtom == exension)
+        if(baseAtom == extension)
             throw new IllegalArgumentException("base and extension atoms cannot be the same");
-
-        bonds.add(new Bond(baseAtom, exension, bondType));
-        return bonds.size();
+        baseAtom.addBond(extension, bondType);
     }
 
     /**
