@@ -48,7 +48,7 @@ public class Molecule {
         //TODO: Java 8 streams why are you so complicated.
         bonds = bonds.stream()
                 .filter(bond -> !bond.getAtoms().contains(extension))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList<Bond>::new));
 
     }
 
