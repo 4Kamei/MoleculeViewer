@@ -40,14 +40,16 @@ public class Molecule {
      * @param baseAtom the base for the bond removal, this atom will remain after the bond is destroyed
      * @param extension the extension atom, this atom will be destroyed after the bond is removed
      */
-    public void removeBond(Atom baseAtom, Atom extension){
-        if(extension == root)
+    public void removeBond(Atom baseAtom, Atom extension) {
+        if (extension == root)
             throw new IllegalArgumentException("extension atom cannot be null");
-        if(extension.getBondedAtoms().containsAll(atoms))
+        if (extension.getBondedAtoms().containsAll(atoms))
             throw new UnsupportedOperationException("cannot remove whole chain, please use removeAllBonds");
-        //TODO: Fix collector
-        //Collector<Bond, ?, ArrayList<Bond>> collector = Collector.of(ArrayList::new, ArrayList::add, (list, bond) -> { list.add(bond); return list});
-        //bonds = bonds.stream().filter(bond -> !bond.getAtoms().contains(extension)).collect(collector);
+        //TODO: Java 8 streams why are you so complicated.
+        bonds = bonds.stream()
+                .filter(bond -> !bond.getAtoms().contains(extension))
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 
     /**
@@ -58,6 +60,8 @@ public class Molecule {
      * @param extension the atom on the other side of the bond, this will be removed once the bond is broken
      */
     public void removeAllBonds(Atom baseAtom, Atom extension){
+        if (extension == root)
+            throw new IllegalArgumentException("extension atom cannot be null");
 
     }
 

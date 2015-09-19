@@ -29,7 +29,10 @@ public enum AtomType{
     }
 
     public static AtomType getTypeBySymbol(String symbol){
-        Stream<AtomType> s = StreamSupport.stream(AtomType.values());
-
+        for(AtomType p : AtomType.values()){
+            if(p.getSymbol().equals(symbol))
+                return p;
+        }
+        return null;
     }
 }
