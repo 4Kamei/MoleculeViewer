@@ -68,7 +68,7 @@ public class Molecule {
      * @param bondType the strength of the bond
      * @return integer - the ID of base atom.
      */
-    public void addBond(Atom baseAtom, Atom extension, Bond.BondType bondType){
+    public void addBond(Atom baseAtom, Atom extension, BondType bondType){
         if(baseAtom == null)
             throw new IllegalArgumentException("base atom cannot be null");
         if(extension == null)
