@@ -34,34 +34,6 @@ public class Molecule {
     }
 
     /**
-     *
-     * @param baseAtom the base for the bond removal, this atom will remain after the bond is destroyed
-     * @param extension the extension atom, this atom will be destroyed after the bond is removed
-     */
-    public void removeBond(Atom baseAtom, Atom extension) {
-        if (extension == null)
-            throw new IllegalArgumentException("extension atom cannot be null");
-        if (extension.getBondedAtoms().containsAll(atoms))
-            throw new UnsupportedOperationException("cannot remove whole chain, please use removeAllBonds");
-        //TODO: Java 8 streams why are you so complicated.
-        baseAtom.getBondedAtoms().remove(extension);
-        atoms.stream().filter(atom -> atom != extension).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    /**
-     * Removes a whole chain from the molecule,
-     * <code> C - C - X - C </code> if X is removed, then the molecule will end up being
-     * <code> C - C </code>
-     * @param baseAtom the base atom from which to unbond
-     * @param extension the atom on the other side of the bond, this will be removed once the bond is broken
-     */
-    public void removeAllBonds(Atom baseAtom, Atom extension){
-        if (extension == null)
-            throw new IllegalArgumentException("extension atom cannot be null");
-
-    }
-
-    /**
      * Adds a bond to an atom in the existing molecule.
      * @param baseAtom the base atom from which to bond from
      * @param extension the extension atom - the second atom
@@ -76,6 +48,36 @@ public class Molecule {
         if(baseAtom == extension)
             throw new IllegalArgumentException("base and extension atoms cannot be the same");
         baseAtom.addBond(extension, bondType);
+        atoms.add(extension);
+    }
+
+    /**
+     *
+     * @param baseAtom the base for the bond removal, this atom will remain after the bond is destroyed
+     * @param extension the extension atom, this atom will be destroyed after the bond is removed
+     */
+    public void removeBond(Atom baseAtom, Atom extension) {
+        if (extension == null)
+            throw new IllegalArgumentException("extension atom cannot be null");
+        if (extension.getBondedAtoms().containsAll(atoms))
+            throw new UnsupportedOperationException("cannot remove whole chain, please use removeAllBonds");
+        //TODO: Java 8 streams why are you so complicated.
+        baseAtom.getBondedAtoms().remove(extension);
+        atoms.stream().filter(atom -> atom != extension).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+
+    /**
+     * Removes a whole chain from the molecule,
+     * <code> C - C - X - C </code> if X is removed, then the molecule will end up being
+     * <code> C - C </code>
+     * @param baseAtom the base atom from which to unbond
+     * @param extension the atom on the other side of the bond, this will be removed once the bond is broken
+     */
+    public void removeAllBonds(Atom baseAtom, Atom extension){
+        if (extension == null)
+            throw new IllegalArgumentException("extension atom cannot be null");
+        //TODO: Write recursive function to through the whole bond 'tree' and remove starting from the top
     }
 
     /**

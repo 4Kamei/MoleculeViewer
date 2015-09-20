@@ -8,24 +8,33 @@ import java.util.stream.StreamSupport;
  */
 public enum AtomType{
 
-    //Symbol, Rel. Atomic Mass, Group Number,
-    CARBON ("C", 12, 4),
-    HYDROGEN ("H", 1, 1),
-    CHLORINE ("Cl", 35.5, 7),
-    NITROGEN ("N", 14, 5);
+    //Name (Symbol, Atomic Name, Atomic Mass, Proton Number
+    //Main Block
+    HELIUM      ("He", "Helium", 3, 2),
+    LITHIUM     ("Li", "Lithium", 7, 3),
+    BERYLLIUM   ("Be", "Beryllium", 9, 4),
+    BORON       ("B", "Boron", 11, 5),
+    CARBON      ("C", "Carbon", 12, 6),
+    NITROGEN    ("N", "Nitrogen", 14, 7),
+    OXYGEN      ("O", "Oxygen", 16, 8),
+    FLUORINE    ("F", "Fluorine", 19, 9),
+    NEON        ("Ne", "Neon", 20, 10);
 
-    private String symbol = null;
-    private double relMass;
-    private int groupNum;
+    private int      atomicMass;
+    private int      protonNumber;
+    private String   atomicSymbol;
+    private String   atomicName;
 
-    double atomicMass(){ return relMass;}
-    int getGroupNum(){ return groupNum;}
-    String getSymbol(){ return symbol;}
+    public double getAtomicMass() {return atomicMass;}
+    public int getProtonNumber() {return protonNumber;}
+    public String getAtomicName() {return atomicName;}
+    public String getSymbol(){ return atomicSymbol;}
 
-    AtomType(String Symbol, double mass, int groupNumber){
-        this.symbol = Symbol;
-        this.relMass = mass;
-        this.groupNum = groupNumber;
+    AtomType(String Symbol, String atomicName, int atomicMass, int protonNumber){
+        this.atomicSymbol = Symbol;
+        this.atomicName = atomicName;
+        this.atomicMass = atomicMass;
+        this.protonNumber = protonNumber;
     }
 
     public static AtomType getTypeBySymbol(String symbol){

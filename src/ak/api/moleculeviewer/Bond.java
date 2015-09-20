@@ -40,8 +40,8 @@ public class Bond {
         return bondType;
     }
 
-    /**The function to get the other atom of the bond, since a bond can only exists between two atoms.
-     *
+    /**
+     * Gets the other atom of the bond, since a bond can only exists between two atoms.
      * @param atom - the atom to be removed.
      * @return Atom - the other atom from the bond
      */
@@ -53,9 +53,7 @@ public class Bond {
         else
             return extension;
     }
-
     /**
-     *
      * @return the two atoms that form the bond.
      */
     public ArrayList<Atom> getAtoms(){

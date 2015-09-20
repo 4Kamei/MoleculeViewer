@@ -59,9 +59,9 @@ public class Atom {
     }
 
     /**
+     * @param atom the atom to unbond from this atom
      * Removes a bond from this atom. Upon removing a bond the other bond is automatically removed
      * X -> Y is removed then Y -> X is also removed.
-     * @param atom the atom to unbond from this atom
      */
     public void removeBond(Atom atom){
         if(bonds.stream().anyMatch(bond -> bond.getAtoms().contains(atom))) {

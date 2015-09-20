@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,7 +20,15 @@ public class Main {
     private static JTextField textField;
 
     public static void main(String[] args) {
-        run();
+        Atom root = new Atom(AtomType.CARBON);
+        Molecule molecule = new Molecule(root);
+        ArrayList<Atom> chain = new ArrayList<>();
+        chain.add(new Atom(AtomType.CARBON));
+        molecule.addBond(root, chain.get(0), BondType.SINGLE);
+        chain.add(new Atom(AtomType.CARBON));
+        molecule.addBond(chain.get(0), chain.get(1), BondType.SINGLE);
+        chain.add(new Atom(AtomType.CARBON));
+        molecule.addBond(chain.get(1), chain.get(2), BondType.SINGLE);
     }
 
     public static void run() {
